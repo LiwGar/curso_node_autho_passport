@@ -24,14 +24,14 @@ router.get('/', (request, response) => {
 
 router.get('/:categoryName', (request, response) => {
   const { categoryName } = request.params;
-  response.json({
+  response.status(200).json({
     categoryName,
   });
 });
 
 router.get('/:categoryId/products/:productId', (request, response) => {
   const { categoryId, productId } = request.params;
-  response.json({
+  response.status(200).json({
     categoryId,
     productId,
   });
@@ -48,7 +48,7 @@ router.post('/', (request, response) => {
 router.patch('/:categoryName', (request, response) => {
   const { categoryName } = request.params;
   const body = request.body;
-  response.json({
+  response.status(200).json({
     categoryName,
     message: 'updated',
     data: body,
@@ -57,7 +57,7 @@ router.patch('/:categoryName', (request, response) => {
 
 router.delete('/:categoryName', (request, response) => {
   const { categoryName } = request.params;
-  response.json({
+  response.status(200).json({
     categoryName,
     message: 'deleted',
   });

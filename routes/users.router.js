@@ -15,12 +15,12 @@ router.get('/', (request, response) => {
       job: faker.person.jobTitle(),
     });
   }
-    response.json(users);
+    response.status(200).json(users);
 });
 
 router.get('/:userId', (request, response) => {
   const {userId} = request.params;
-  response.json({
+  response.status(200).json({
     userId,
     name: faker.person.fullName(),
     role: faker.person.bio(),
@@ -30,7 +30,7 @@ router.get('/:userId', (request, response) => {
 
 router.post('/', (request, response) => {
   const body = request.body;
-  response.json({
+  response.status(201).json({
     message: 'created',
     data: body,
   });
@@ -39,7 +39,7 @@ router.post('/', (request, response) => {
 router.patch('/:userId', (request, response) => {
   const { userId } = request.params;
   const body = request.body;
-  response.json({
+  response.status(200).json({
     userId,
     message: 'updated',
     data: body,
@@ -48,7 +48,7 @@ router.patch('/:userId', (request, response) => {
 
 router.delete('/:userId', (request, response) => {
   const { userId } = request.params;
-  response.json({
+  response.status(200).json({
     userId,
     message: 'deleted',
   });
