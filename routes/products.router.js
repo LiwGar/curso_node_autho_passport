@@ -28,8 +28,16 @@ router.get('/', (request, response) => {
     response.json({
       productId,
       name: 'Product 2',
-      price: 10
+      price: 10,
     });
+  });
+
+  router.post('/', (request, response) => {
+    const body = request.body;
+    response.json({
+      message: 'created',
+      data: body,
+    })
   });
 
   module.exports = router;

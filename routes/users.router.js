@@ -5,15 +5,17 @@ const { faker } = require('@faker-js/faker');
 const router = express.Router();
 
 router.get('/', (request, response) => {
-  const { limit, offset } = request.query;
-  if(limit && offset) {
-    response.json({
-      limit,
-      offset
+  const users = [];
+  const { size } = request.query;
+  const limit = size || 10;
+  for (let index = 0; index < limit; index++) {
+    users.push({
+      name: faker.person.fullName(),
+      role: faker.person.bio(),
+      job: faker.person.jobTitle(),
     });
-  }else{
-    response.send('There are no parameters');
-  };
+  }
+    response.json(users);
 });
 
 router.get('/:userId', (request, response) => {
@@ -26,5 +28,12 @@ router.get('/:userId', (request, response) => {
   });
 });
 
+router.post('/', (request, response) => {
+  const body = request.body;
+  response.json({
+    message: 'created',
+    data: body,
+  });
+});
 
 module.exports = router;
