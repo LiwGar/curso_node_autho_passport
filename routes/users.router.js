@@ -36,4 +36,22 @@ router.post('/', (request, response) => {
   });
 });
 
+router.patch('/:userId', (request, response) => {
+  const { userId } = request.params;
+  const body = request.body;
+  response.json({
+    userId,
+    message: 'updated',
+    data: body,
+  });
+});
+
+router.delete('/:userId', (request, response) => {
+  const { userId } = request.params;
+  response.json({
+    userId,
+    message: 'deleted',
+  });
+});
+
 module.exports = router;

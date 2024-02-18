@@ -24,7 +24,7 @@ router.get('/', (request, response) => {
   });
 
   router.get('/:productId', (request, response) => {
-    const {productId} = request.params;
+    const { productId } = request.params;
     response.json({
       productId,
       name: 'Product 2',
@@ -37,7 +37,25 @@ router.get('/', (request, response) => {
     response.json({
       message: 'created',
       data: body,
-    })
+    });
+  });
+
+  router.patch('/:productId', (request, response) => {
+    const { productId } = request.params;
+    const body = request.body;
+    response.json({
+      productId,
+      message: 'updated',
+      data: body,
+    });
+  });
+
+  router.delete('/:productId', (request, response) => {
+    const { productId } = request.params;
+    response.json({
+      productId,
+      message: 'deleted',
+    });
   });
 
   module.exports = router;
