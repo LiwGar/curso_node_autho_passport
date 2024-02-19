@@ -8,26 +8,32 @@ const service = new ProductsService();
 
 
 router.get('/', async (request, response) => {
-    const products = await service.find();
-    response.status(200).json(products);
+    try {
+      const products = await service.find();
+      response.status(200).json(products);
+    } catch (error) {
+      next(error);
+    }
   });
 
-  router.get('/:id', async (request, response) => {
+  router.get('/:id', async (request, response, next) => {
     try {
       const { id } = request.params;
       const product = await service.findOne(id);
       response.status(200).json(product);
     } catch (error) {
-      response.status(404).json({
-        message: error.message
-      });
+      next(error);
     }
   });
 
-  router.post('/', async (request, response) => {
-    const body = request.body;
-    const newProduct = await service.create(body);
-    response.status(201).json(newProduct);
+  router.post('/', async (request, response, next) => {
+    try {
+      const body = request.body;
+      const newProduct = await service.create(body);
+      response.status(201).json(newProduct);
+    } catch (error) {
+      next(error);
+    }
   });
 
   router.patch('/:id', async (request, response) => {
@@ -37,9 +43,7 @@ router.get('/', async (request, response) => {
       const product = await service.update(id, body);
       response.status(200).json(product);
     }catch (error){
-        response.status(404).json({
-        message: error.message
-      });
+      next(error);
     }
   });
 
@@ -49,9 +53,7 @@ router.get('/', async (request, response) => {
     const rta = await service.delete(id);
     response.status(200).json(rta);
    } catch (error) {
-      response.status(404).json({
-      message: error.message
-    });
+    next(error);
    }
   });
 
