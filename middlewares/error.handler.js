@@ -10,4 +10,14 @@ function errorHandler(error, request, response, next) {
   });
 };
 
-module.exports = { logErrors, errorHandler };
+function boomErrorHandler(error, request, response, next) {
+  if (error.isBoom) {
+    const { output } = error;
+    response.status(output.statusCode).json(output.payload);
+  } else {
+    next(error);
+  }
+
+};
+
+module.exports = { logErrors, errorHandler, boomErrorHandler };

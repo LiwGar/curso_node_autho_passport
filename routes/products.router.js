@@ -7,7 +7,7 @@ const router = express.Router();
 const service = new ProductsService();
 
 
-router.get('/', async (request, response) => {
+router.get('/', async (request, response, next) => {
     try {
       const products = await service.find();
       response.status(200).json(products);
@@ -36,18 +36,18 @@ router.get('/', async (request, response) => {
     }
   });
 
-  router.patch('/:id', async (request, response) => {
+  router.patch('/:id', async (request, response, next) => {
     try {
       const { id } = request.params;
       const body = request.body;
       const product = await service.update(id, body);
       response.status(200).json(product);
-    }catch (error){
+    } catch (error){
       next(error);
     }
   });
 
-  router.delete('/:id', async (request, response) => {
+  router.delete('/:id', async (request, response, next) => {
    try {
     const { id } = request.params;
     const rta = await service.delete(id);
