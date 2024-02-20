@@ -1,67 +1,77 @@
 const express = require('express');
 
-const { faker } = require('@faker-js/faker');
+const CategoryService = require('./../services/category.service');
+
+const validatorHandler = require('./../middlewares/validator.handler');
+
+const { createCategorySchema, getCategorySchema, updateCategorySchema } = require('./../schemas/category.schema');
 
 const router = express.Router();
 
+const service = new CategoryService();
 
-router.get('/', (request, response) => {
-  response.json([
-    {
-      category: faker.commerce.productAdjective(),
-    },
-    {
-      category: faker.commerce.productAdjective(),
-    },
-    {
-      category: faker.commerce.productAdjective(),
-    },
-    {
-      category: faker.commerce.productAdjective(),
+
+router.get('/', async (request, response, next) => {
+  try {
+    const categories = await service.find();
+    response.status(200).json(categories);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/:id',
+  validatorHandler(getCategorySchema, 'params'),
+  async (request, response, next) => {
+    try {
+      const { id } = request.params;
+      const category = await service.findOne(id);
+      response.json(category);
+    } catch (error) {
+      next(error);
     }
-  ]);
-});
+  }
+);
 
-router.get('/:categoryName', (request, response) => {
-  const { categoryName } = request.params;
-  response.status(200).json({
-    categoryName,
-  });
-});
+router.post('/',
+  validatorHandler(createCategorySchema, 'body'),
+  async (request, response, next) => {
+    try {
+      const body = request.body;
+      const newCategory = await service.create(body);
+      response.status(201).json(newCategory);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
-router.get('/:categoryId/products/:productId', (request, response) => {
-  const { categoryId, productId } = request.params;
-  response.status(200).json({
-    categoryId,
-    productId,
-  });
-});
+router.patch('/:id',
+  validatorHandler(getCategorySchema, 'params'),
+  validatorHandler(updateCategorySchema, 'body'),
+  async (request, response, next) => {
+    try {
+      const { id } = request.params;
+      const body = request.body;
+      const category = await service.update(id, body);
+      response.json(category);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
-router.post('/', (request, response) => {
-  const body = request.body;
-  response.json({
-    message: 'created',
-    data: body,
-  });
-});
-
-router.patch('/:categoryName', (request, response) => {
-  const { categoryName } = request.params;
-  const body = request.body;
-  response.status(200).json({
-    categoryName,
-    message: 'updated',
-    data: body,
-  });
-});
-
-router.delete('/:categoryName', (request, response) => {
-  const { categoryName } = request.params;
-  response.status(200).json({
-    categoryName,
-    message: 'deleted',
-  });
-});
-
+router.delete('/:id',
+  validatorHandler(getCategorySchema, 'params'),
+  async (request, response, next) => {
+    try {
+      const { id } = request.params;
+      await service.delete(id);
+      response.status(201).json({id});
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 module.exports = router;

@@ -38,7 +38,7 @@ router.get('/', async (request, response, next) => {
     try {
       const body = request.body;
       const newProduct = await service.create(body);
-      response.json(newProduct);
+      response.status(201).json(newProduct);
     } catch (error) {
       next(error);
     }
@@ -62,7 +62,7 @@ router.get('/', async (request, response, next) => {
    try {
     const { id } = request.params;
     const rta = await service.delete(id);
-    response.json(rta);
+    response.status(201).json(rta);
    } catch (error) {
     next(error);
    }
