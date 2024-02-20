@@ -8,7 +8,7 @@ const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/err
 
 const app = express();
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 //
@@ -17,7 +17,6 @@ const whiteList = [ 'http://localhost:3000', 'http://127.0.0.1:5500', 'http://lo
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || whiteList.includes(origin)) {
-      console.log('origin:', origin);
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
