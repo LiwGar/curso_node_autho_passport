@@ -64,7 +64,7 @@ npm run start
 - Routing, Services, Schemas and Middlewares.
 - Error Handling and Data Validation.
 
-### he objective is:
+### The objective is:
 - Improve the development of Rest API. with Node.js and express.js.
 - Never stop learning.
 
