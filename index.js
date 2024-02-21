@@ -27,7 +27,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.get('/', (request, response) => {
-  response.send({status: 'Server in Express OK'});
+  response.send({status: 'Welcome to my first API Whit Node.js - Express.js'});
+  response.send('add to url: /api/v1/products, /api/v1/categories, /api/v1/users, /api/v1/[id] ');
 });
 
 routerApi(app);
@@ -37,7 +38,7 @@ app.use(boomErrorHandler);
 app.use(errorHandler);
 
 app.listen(port, () => {
-  console.log(`La API está escuchando en el puerto ${port}`);
+  console.log(`The API is listening on the port ${port}`);
 });
 
 routerApi(app);
