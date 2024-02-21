@@ -27,8 +27,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.get('/api', (request, response) => {
-  response.send({status: 'Welcome to my first API whit Node.js - Express.js'});
-  response.send('add to url: /api/v1/products, /api/v1/categories, /api/v1/users, /api/v1/[id] ');
+  response.send('Welcome to my first API whit Node.js - Express.js' + 'add to url: /api/v1/products, /api/v1/categories, /api/v1/users, /api/v1/[id]');
 });
 
 routerApi(app);
