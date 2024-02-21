@@ -1,12 +1,12 @@
 # Welcome! 👋
 
-This is a API REST con Express.js
+This is a API REST with Express.js
 
 ### Screenshot
-![](D:\node-api-rest-express.vercel.app_api_v1_products(Nest Hub Max).png)
+![](./images/node-api-rest-express.vercel.app_api_v1_products(Nest%20Hub%20Max).png)
 
 ### Links
-- Live Site URL: [API](https://node-api-rest-express.vercel.app/api/v1/products)
+- Live Site URL: [API REST](https://node-api-rest-express.vercel.app/api/v1/products)
 
 ## Routes
 
@@ -64,7 +64,7 @@ npm run start
 - Routing, Services, Schemas and Middlewares.
 - Error Handling and Data Validation.
 
-###The objective is:
+### he objective is:
 - Improve the development of Rest API. with Node.js and express.js.
 - Never stop learning.
 
