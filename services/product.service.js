@@ -35,7 +35,7 @@ class ProductsService {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(this.products);
-      }, 3000);
+      }, 2000);
     });
   }
 

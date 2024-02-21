@@ -1,57 +1,76 @@
 const express = require('express');
 
-const { faker } = require('@faker-js/faker');
+const UserService = require('./../services/user.service');
+
+const validatorHandler = require('./../middlewares/validator.handler');
+
+const { createUserSchema, getUserSchema, updateUserSchema } = require('./../schemas/user.schema');
 
 const router = express.Router();
 
-router.get('/', (request, response) => {
-  const users = [];
-  const { size } = request.query;
-  const limit = size || 10;
-  for (let index = 0; index < limit; index++) {
-    users.push({
-      name: faker.person.fullName(),
-      role: faker.person.bio(),
-      job: faker.person.jobTitle(),
-    });
+const service = new UserService();
+
+router.get('/', async (request, response, next) => {
+  try {
+    const categories = await service.find();
+    response.status(200).json(categories);
+  } catch (error) {
+    next(error);
   }
-    response.status(200).json(users);
 });
 
-router.get('/:userId', (request, response) => {
-  const {userId} = request.params;
-  response.status(200).json({
-    userId,
-    name: faker.person.fullName(),
-    role: faker.person.bio(),
-    job: faker.person.jobTitle(),
-  });
-});
+router.get('/:id',
+  validatorHandler(getUserSchema, 'params'),
+  async (request, response, next) => {
+    try {
+      const { id } = request.params;
+      const category = await service.findOne(id);
+      response.json(category);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
-router.post('/', (request, response) => {
-  const body = request.body;
-  response.status(201).json({
-    message: 'created',
-    data: body,
-  });
-});
+router.post('/',
+  validatorHandler(createUserSchema, 'body'),
+  async (request, response, next) => {
+    try {
+      const body = request.body;
+      const newCategory = await service.create(body);
+      response.status(201).json(newCategory);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
-router.patch('/:userId', (request, response) => {
-  const { userId } = request.params;
-  const body = request.body;
-  response.status(200).json({
-    userId,
-    message: 'updated',
-    data: body,
-  });
-});
+router.patch('/:id',
+  validatorHandler(getUserSchema, 'params'),
+  validatorHandler(updateUserSchema, 'body'),
+  async (request, response, next) => {
+    try {
+      const { id } = request.params;
+      const body = request.body;
+      const category = await service.update(id, body);
+      response.json(category);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
-router.delete('/:userId', (request, response) => {
-  const { userId } = request.params;
-  response.status(200).json({
-    userId,
-    message: 'deleted',
-  });
-});
+router.delete('/:id',
+  validatorHandler(getUserSchema, 'params'),
+  async (request, response, next) => {
+    try {
+      const { id } = request.params;
+      await service.delete(id);
+      response.status(201).json({id});
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 module.exports = router;
