@@ -12,8 +12,8 @@ const service = new UserService();
 
 router.get('/', async (request, response, next) => {
   try {
-    const categories = await service.find();
-    response.status(200).json(categories);
+    const users = await service.find();
+    response.status(200).json(users);
   } catch (error) {
     next(error);
   }
@@ -24,8 +24,8 @@ router.get('/:id',
   async (request, response, next) => {
     try {
       const { id } = request.params;
-      const category = await service.findOne(id);
-      response.json(category);
+      const user = await service.findOne(id);
+      response.json(user);
     } catch (error) {
       next(error);
     }
@@ -37,8 +37,8 @@ router.post('/',
   async (request, response, next) => {
     try {
       const body = request.body;
-      const newCategory = await service.create(body);
-      response.status(201).json(newCategory);
+      const newUser = await service.create(body);
+      response.status(201).json(newUser);
     } catch (error) {
       next(error);
     }
@@ -52,8 +52,8 @@ router.patch('/:id',
     try {
       const { id } = request.params;
       const body = request.body;
-      const category = await service.update(id, body);
-      response.json(category);
+      const user = await service.update(id, body);
+      response.json(user);
     } catch (error) {
       next(error);
     }
