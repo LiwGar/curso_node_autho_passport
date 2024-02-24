@@ -1,14 +1,14 @@
 const Joi = require('joi');
 
-const id = Joi.string().uuid();
-const name = Joi.string().min(3).max(21);
-const role = Joi.string().min(5)
-const job = Joi.string().min(5)
+const id = Joi.number().integer();
+const email = Joi.string().email();
+const password = Joi.string().min(8);
+// const role = Joi.string().min(5);
 
 const createUserSchema = Joi.object({
-  name: name.required(),
-  role: role.required(),
-  job: job.required()
+  email: email.required(),
+  password: password.required(),
+  // role: role.required(),
 });
 
 const getUserSchema = Joi.object({
@@ -16,9 +16,8 @@ const getUserSchema = Joi.object({
 });
 
 const updateUserSchema = Joi.object({
-  name: name,
-  role: role,
-  job:job,
+  email: email,
+  // role: role,
 });
 
 module.exports = { createUserSchema, getUserSchema, updateUserSchema };
