@@ -3,11 +3,20 @@
 const { UserSchema, USER_TABLE} = require('./../models/user.model');
 
 module.exports = {
-  async up (queryInterface) {
-   await queryInterface.addColumn(USER_TABLE, 'role', UserSchema.role);
+  up: async (queryInterface, Sequelize) => {
+    // Verificar si la columna "role" ya existe en la tabla "users"
+    const columns = await queryInterface.describeTable('users');
+    if (!columns.role) {
+      // La columna "role" no existe, crearla
+      await queryInterface.addColumn('users', 'role', {
+        type: Sequelize.STRING,
+        allowNull: true
+      });
+    }
   },
 
-  async down (queryInterface) {
-    await queryInterface.removeColumn(USER_TABLE, 'role', UserSchema.role);
+  down: async (queryInterface) => {
+    // Eliminar la columna "role" si es necesario
+    await queryInterface.removeColumn('users', 'role');
   }
 };

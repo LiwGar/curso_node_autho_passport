@@ -1,6 +1,10 @@
 {
-  "name": "16_curso_node_express",
+  "name": "17_curso_node_postgres",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LiwGar/curso_node_base_datos_postgres"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
