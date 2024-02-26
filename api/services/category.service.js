@@ -1,79 +1,39 @@
-const { faker } = require('@faker-js/faker');
+const { models } = require('./../../libs/sequelize');
 
 class CategoryService {
-  constructor(){
-    this.categories = [
-      {
-        id: '1',
-        name: 'Electronics',
-        image: faker.image.url(),
-      },
-      {
-        id: '2',
-        name: 'Clothes',
-        image: faker.image.url(),
-      },
-      {
-        id: '3',
-        name: 'Shoes',
-        image: faker.image.url(),
-      },
-      {
-        id: '4',
-        name: 'Books',
-        image: faker.image.url(),
-      },
-      {
-        id: '5',
-        name: 'Food',
-        image: faker.image.url(),
-      },
-      {
-        id: '6',
-        name: 'Drinks',
-        image: faker.image.url(),
-      },
-      {
-        id: '7',
-        name: 'Jewerly',
-        image: faker.image.url(),
-      },
-    ];
-  }
+  constructor(){}
 
   async create(data) {
-    const newCategory = {
-      ...data
-    }
-    this.categories.push(newCategory);
+    const newCategory = await models.Category.create(data);
     return newCategory;
   }
 
   async find() {
-    return this.categories;
-  }
+    const categories = await models.Category.findAll();
+    return categories;
+  };
 
   async findOne(id) {
-    return this.categories.find(category => category.id === id);
-  }
+    const category = await models.Category.findByPk(id, {
+      include: ['products']
+    });
+    if (!category) {
+      throw boom.notFound('Category not found');
+    }
+    return category;
+  };
 
   async update(id, changes) {
-    const index = this.categories.findIndex(category => category.id === id);
-    if (index !== -1) {
-      this.categories[index] = { ...this.categories[index], ...changes };
-      return { id, changes };
-    }
-    return null;
-  }
+    const model = await this.findOne(id);
+    const rta = await model.update(changes);
+    return rta;
+  };
 
   async delete(id) {
-    const index = this.categories.findIndex(category => category.id === id);
-    if (index !== -1) {
-      this.categories.splice(index, 1);
-      return { id };
-    }
-    return null;
-  }
+    const model = await this.findOne(id);
+    await model.destroy();
+    return { rta: true };
+  };
 }
 
 module.exports = CategoryService;
