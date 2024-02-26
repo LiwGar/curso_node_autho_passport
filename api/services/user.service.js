@@ -1,6 +1,6 @@
-const { models } = require('./../../libs/sequelize')
-
 const boom = require('@hapi/boom');
+
+const { models } = require('./../../libs/sequelize');
 
 class UserService {
 
@@ -19,7 +19,9 @@ class UserService {
   }
 
   async findOne(id) {
-    const user = await models.User.findByPk(id);
+    const user = await models.User.findByPk(id, {
+      include: ['customer']
+    });
     if (!user){
       throw boom.notFound('User not found');
     };
