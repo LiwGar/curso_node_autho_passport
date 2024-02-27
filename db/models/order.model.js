@@ -20,7 +20,7 @@ const OrderSchema = {
   total: {
     type: DataTypes.VIRTUAL,
     get() {
-      if(this.items.length > 0) {
+      if (Array.isArray(this.items) && this.items.length > 0) {
         return this.items.reduce((total, item) => {
           return total + (item.price * item.OrderProduct.amount);
         }, 0);
@@ -49,7 +49,7 @@ class Order extends Model {
       through: models.OrderProduct,
       foreignKey: 'orderId',
       otherKey: 'productId'
-    })
+    });
   }
 
   static config(sequelize) {
