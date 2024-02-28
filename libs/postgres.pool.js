@@ -1,11 +1,12 @@
 const { Pool } = require('pg');
 
-const { config } = require('./../config/config');
+const pool = new Pool({
+  connectionString: process.env.POSTGRES_URL ,
+});
 
-const USER = encodeURIComponent(config.dbUser);
-const PASSWORD = encodeURIComponent(config.dbPassword);
-const URI = `postgresql://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
-
-const pool = new Pool({ connectionString: URI });
+pool.connect((error) => {
+  if (error) throw error
+  console.log('Connect to PostgreSQL successfully!');
+});
 
 module.exports = pool;
