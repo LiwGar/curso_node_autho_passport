@@ -9,7 +9,7 @@ const config = {
   dbHost: process.env.DB_HOST,
   dbName: process.env.DB_NAME,
   dbPort: parseInt(process.env.DB_PORT, 10) || 5432,
-  dbUrl: process.env.DATABASE_URL,
+  dbUrl: process.env.POSTGRES_URL,
 };
 
 module.exports = { config };

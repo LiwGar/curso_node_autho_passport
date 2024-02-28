@@ -4,11 +4,6 @@ const { config } = require('./../config/config');
 
 const setupModels = require('./../db/models');
 
-if (!config.dbUrl) {
-  console.error('The database URL is not defined in the configuration.');
-  process.exit(1); 
-}
-
 const options = {
   dialect: 'postgres',
   logging:  config.isProd ? false : true,
