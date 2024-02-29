@@ -2,16 +2,12 @@ const { config } = require('./../config/config');
 
 module.exports = {
   development: {
-    url: config.dbUrl,
+    url: `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`,
     dialect: 'postgres',
+    ...options, 
   },
   production: {
     url: config.dbUrl,
     dialect: 'postgres',
-    dialectOptions: {
-      ssl: {
-        rejectUnauthorized: false
-      }
-    }
   }
 }
