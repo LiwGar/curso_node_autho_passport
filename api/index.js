@@ -36,7 +36,7 @@ app.use(cors(corsOptions));
 
 app.get('/api', (request, response) => {
   const messageUno = 'Welcome to my first API whit Node.js - Express.js';
-  const messageDos = 'Add to the end of the URL: /api/v1/products, /api/v1/categories, /api/v1/users, /api/v1/[id]';
+  const messageDos = 'Add to the end of the URL: /v1/products, /v1/categories, /v1/users, /v1/[id]';
   response.send(`${messageUno}<br>${messageDos}`);
 });
 
