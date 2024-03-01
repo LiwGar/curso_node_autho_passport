@@ -3,7 +3,9 @@
 This is a API REST with Express.js + Database with PostgreSQL
 
 ### Screenshot
-![](./images/node-api-rest-express.vercel.app_api_v1_products(Nest%20Hub%20Max).png)
+![](./images/curso-node-base-datos-postgres.onrender.com_api_v1_categories(Nest%20Hub%20Max).png)
+![](./images/curso-node-base-datos-postgres.onrender.com_api_v1_customers(Nest%20Hub%20Max).png)
+![](./images/isLiveWow.png)
 
 ### Links
 - Live Site URL: [API REST](https://curso-node-base-datos-postgres.onrender.com)
@@ -89,5 +91,5 @@ npm run start
 - Never stop learning.
 
 ## Author
-- Website - [LiwGAr](https://liwgar-portfolio.vercel.app/)
+- Website - [LiwGar](https://liwgar-portfolio.vercel.app/)
   
