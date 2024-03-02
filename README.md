@@ -14,7 +14,7 @@ This is a API REST with Express.js + Database with PostgreSQL
 </p>
 
 ### Links
-- Live Site URL: [API REST](https://curso-node-base-datos-postgres.onrender.com)
+- Live Site URL: [API REST](https://curso-node-base-datos-postgres.onrender.com/api)
 
 ## Routes
 
