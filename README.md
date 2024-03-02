@@ -4,13 +4,13 @@ This is a API REST with Express.js + Database with PostgreSQL
 
 ### Screenshot
 <p text-align="center">
-  <img src="./images/curso-node-base-datos-postgres.onrender.com_api_v1_categories(Nest%20Hub%20Max).png" width="200" height="150">
+  <img src="./images/curso-node-base-datos-postgres.onrender.com_api_v1_categories(Nest%20Hub%20Max).png" width="600" height="450">
 </p>
 <p text-align="center">
-  <img src="./images/curso-node-base-datos-postgres.onrender.com_api_v1_customers(Nest%20Hub%20Max).png" width="200" height="150">
+  <img src="./images/curso-node-base-datos-postgres.onrender.com_api_v1_customers(Nest%20Hub%20Max).png" width="600" height="450">
 </p>
 <p text-align="center">
-  <img src="./images/isLiveWow.png.png" width="200" height="150">
+  <img src="./images/isLiveWow.png" width="600" height="450">
 </p>
 
 ### Links
