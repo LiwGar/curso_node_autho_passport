@@ -3,9 +3,15 @@
 This is a API REST with Express.js + Database with PostgreSQL
 
 ### Screenshot
-![](./images/curso-node-base-datos-postgres.onrender.com_api_v1_categories(Nest%20Hub%20Max).png)
-![](./images/curso-node-base-datos-postgres.onrender.com_api_v1_customers(Nest%20Hub%20Max).png)
-![](./images/isLiveWow.png)
+<p text-align="center">
+  <img src="./images/curso-node-base-datos-postgres.onrender.com_api_v1_categories(Nest%20Hub%20Max).png" width="200" height="150">
+</p>
+<p text-align="center">
+  <img src="./images/curso-node-base-datos-postgres.onrender.com_api_v1_customers(Nest%20Hub%20Max).png" width="200" height="150">
+</p>
+<p text-align="center">
+  <img src="./images/isLiveWow.png.png" width="200" height="150">
+</p>
 
 ### Links
 - Live Site URL: [API REST](https://curso-node-base-datos-postgres.onrender.com)
