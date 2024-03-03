@@ -6,25 +6,39 @@ const setupModels = require('./../db/models');
 
 const options = {
   dialect: 'postgres',
-  logging: false, 
+  logging: config.isProd ? false : true,
 };
 
+if(config.isProd) {
+  options.dialectOptions = {
+    ssl: {
+      rejectUnauthorized: false
+    }
+  }
+};
 
-if (config.isProd) {
+const sequelize=new Sequelize(config.dbUrl,options);
 
-  options.ssl = {
-    rejectUnauthorized: false, 
-  };
-  options.connectionString = config.dbUrl;
-} else {
+// const options = {
+//   dialect: 'postgres',
+//   logging: false, 
+// };
+
+// if (config.isProd) {
+
+//   options.ssl = {
+//     rejectUnauthorized: false, 
+//   };
+//   options.connectionString = config.dbUrl;
+// } else {
   
-  const USER = encodeURIComponent(config.dbUser);
-  const PASSWORD = encodeURIComponent(config.dbPassword);
-  const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
-  options.connectionString = URI;
-}
+//   const USER = encodeURIComponent(config.dbUser);
+//   const PASSWORD = encodeURIComponent(config.dbPassword);
+//   const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`;
+//   options.connectionString = URI;
+// }
 
-const sequelize = new Sequelize(options.connectionString, options);
+// const sequelize = new Sequelize(options.connectionString, options);
 
 setupModels(sequelize);
 
