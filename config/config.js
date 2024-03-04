@@ -10,6 +10,7 @@ const config = {
   dbName: process.env.DB_NAME,
   dbPort: parseInt(process.env.DB_PORT, 10) || 5432,
   dbUrl: process.env.POSTGRES_URL || '',
+  apiKey: process.env.API_KEY,
 };
 
 module.exports = { config };

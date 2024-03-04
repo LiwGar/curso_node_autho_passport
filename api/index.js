@@ -6,6 +6,8 @@ const routerApi = require('./routes');
 
 const { logErrors, errorHandler, boomErrorHandler, ormErrorHandler } = require('./middlewares/error.handler');
 
+const { checkApiKey } = require('./middlewares/auth.handler');
+
 const app = express();
 
 const port = process.env.PORT || 3000;
@@ -32,6 +34,10 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+app.get('/new-route', checkApiKey, (request, response) => {
+  response.send('I am a new route');
+});
 
 app.get('/api', (request, response) => {
   const messageUno = 'Welcome to my first API whit Node.js - Express.js';
